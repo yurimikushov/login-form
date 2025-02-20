@@ -1,0 +1,63 @@
+.login-form {
+  inline-size: 100%;
+  max-inline-size: 380px;
+
+  padding: 24px;
+
+  border: 1px solid #d3d3de33;
+  border-radius: 12px;
+}
+
+.login-form__welcome {
+  margin-block: 32px;
+
+  text-align: center;
+}
+
+.login-form__form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.login-form__input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.login-form__password-input-group {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+}
+
+.login-form__password-input {
+  flex: 1;
+}
+
+.login-form__action-group {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+
+.login-form__email-input,
+.login-form__password-input {
+  block-size: 40px;
+}
+
+.login-form__submit,
+.login-form__show-password {
+  min-block-size: 40px;
+}
+
+.login-form__submit {
+  min-inline-size: 100px;
+}
+
+.login-form__show-password {
+  min-inline-size: 65px;
+}

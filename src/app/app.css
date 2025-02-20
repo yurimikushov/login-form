@@ -1,0 +1,54 @@
+body {
+  font-family: system-ui, arial, sans-serif;
+
+  color: #fff;
+
+  background-color: #121212;
+}
+
+button {
+  padding-block: 8px;
+  padding-inline: 12px;
+
+  font-size: 1rem;
+
+  color: #1f1f24;
+
+  cursor: pointer;
+
+  border: none;
+  border-radius: 4px;
+
+  background-color: #fafaff;
+}
+
+a {
+  color: #f7f7ffe6;
+}
+
+input {
+  padding-block: 8px;
+  padding-inline: 12px;
+
+  font-size: 1rem;
+
+  border: 2px solid #ced4da;
+
+  border-radius: 8px;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible {
+  box-shadow: 0 0 0 4px #fafaff;
+  outline: 2px solid #131317;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  min-block-size: 100dvh;
+}

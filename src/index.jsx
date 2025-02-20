@@ -1,5 +1,5 @@
 import { render } from "preact";
 
-const App = () => <h1>Hello, World!</h1>;
+import { App } from "./app/app";
 
 render(<App />, document.getElementById("app"));
