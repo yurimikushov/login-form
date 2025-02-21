@@ -61,3 +61,9 @@
 .login-form__show-password {
   min-inline-size: 65px;
 }
+
+.login-form__error {
+  color: #ff0000;
+
+  font-size: 0.875rem;
+}

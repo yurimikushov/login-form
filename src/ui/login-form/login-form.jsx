@@ -6,28 +6,40 @@ import "./login-form.css";
 
 export const LoginForm = () => {
   const [loading, setLoading] = useState(false);
-  const [serverErrors, setServerErrors] = useState(null);
+  const [errors, setErrors] = useState([]);
   const [shouldShowPassword, setShouldShowPassword] = useState(false);
+
+  const emailErrors = errors.filter((error) => {
+    return error.id.startsWith("email.");
+  });
+  const passwordErrors = errors.filter((error) => {
+    return error.id.startsWith("password.");
+  });
+  const otherErrors = errors.filter((error) => {
+    return !error.id.startsWith("email.") && !error.id.startsWith("password.");
+  });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     setLoading(true);
-    setServerErrors(null);
+    setErrors([]);
 
     try {
       const response = await login(
-        e.target.email.value,
-        e.target.password.value
+        e.target["login-form-email"].value,
+        e.target["login-form-password"].value
       );
 
-      if (response.success) {
+      const data = await response.json();
+
+      if (data.status === "success") {
         alert("Logged in successfully");
       } else {
-        setServerErrors(await response.json().errors);
+        setErrors(data.errors);
       }
     } catch (error) {
-      setServerErrors([new Error("Something went wrong")]);
+      setErrors([{ id: "internal", message: "An unknown error occurred" }]);
     } finally {
       setLoading(false);
     }
@@ -36,19 +48,23 @@ export const LoginForm = () => {
   return (
     <div className="login-form">
       <h2 className="login-form__welcome">Welcome to Sign In</h2>
-      <form className="login-form__form" onSubmit={handleSubmit}>
+      <form className="login-form__form" novalidate onSubmit={handleSubmit}>
         <div className="login-form__input-group">
           <label for="login-form-email">Email</label>
           <input
             className="login-form__email-input"
             id="login-form-email"
             type="email"
-            required
             disabled={loading}
             autocorrect="off"
             autocapitalize="off"
+            aria-invalid={emailErrors.length > 0 ? "true" : "false"}
           />
-          {/* {errors.email && <p role="alert">{errors.email.message}</p>} */}
+          {emailErrors.length > 0 && (
+            <p className="login-form__error" aria-live="polite">
+              {emailErrors.map(({ message }) => message).join(", ")}
+            </p>
+          )}
         </div>
 
         <div className="login-form__input-group">
@@ -58,10 +74,10 @@ export const LoginForm = () => {
               className="login-form__password-input"
               id="login-form-password"
               type={shouldShowPassword ? "text" : "password"}
-              required
               disabled={loading}
               autocorrect="off"
               autocapitalize="off"
+              aria-invalid={passwordErrors.length > 0 ? "true" : "false"}
             />
             <button
               className="login-form__show-password"
@@ -71,12 +87,16 @@ export const LoginForm = () => {
               {shouldShowPassword ? "Hide" : "Show"}
             </button>
           </div>
-          {/* {errors.password && <p role="alert">{errors.password.message}</p>} */}
+          {passwordErrors.length > 0 && (
+            <p className="login-form__error" aria-live="polite">
+              {passwordErrors.map(({ message }) => message).join(", ")}
+            </p>
+          )}
         </div>
 
-        {serverErrors && (
-          <p role="alert" style={{ color: "red" }}>
-            {serverErrors.map((error) => error.message).join(", ")}
+        {otherErrors.length > 0 && (
+          <p className="login-form__error" aria-live="polite">
+            {otherErrors.map(({ message }) => message).join(", ")}
           </p>
         )}
 
