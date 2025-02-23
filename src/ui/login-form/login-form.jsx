@@ -7,7 +7,7 @@ export const LoginForm = ({ pending, errors, onSubmit }) => {
 
   return (
     <div className="login-form">
-      <h2 className="login-form__welcome">Welcome to Sign In</h2>
+      <h2 className="login-form__welcome">Welcome, let's log in</h2>
       <form className="login-form__form" novalidate onSubmit={onSubmit}>
         <div className="login-form__input-group">
           <label for="login-form-email">Email</label>
@@ -66,7 +66,7 @@ export const LoginForm = ({ pending, errors, onSubmit }) => {
             type="submit"
             disabled={pending}
           >
-            {pending ? "Signing in..." : "Sign in"}
+            {pending ? "Logging in..." : "Log in"}
           </button>
           <a href="#" className="login-form__forgot-password">
             Forgot password?
