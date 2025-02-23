@@ -60,6 +60,16 @@ export const login = (email, password) => {
         return;
       }
 
+      // back-end error simulation
+      if (Math.random() > 0.7) {
+        resolve({
+          ok: false,
+          status: 500,
+          json: () => undefined,
+        });
+        return;
+      }
+
       // network error simulation
       if (Math.random() > 0.8) {
         reject(new Error("Network error"));
