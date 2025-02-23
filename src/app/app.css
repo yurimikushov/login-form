@@ -64,7 +64,10 @@ main {
   justify-content: center;
   align-items: center;
 
+  inline-size: 100%;
   min-inline-size: 320px;
+  max-inline-size: min(380px, calc(100vw - 32px));
+
   min-block-size: 200px;
 
   padding: 24px;
