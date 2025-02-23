@@ -1,6 +1,7 @@
 import { useState } from "preact/hooks";
 
 export const useLoginForm = (login) => {
+  const [loggedIn, setLoggedIn] = useState(false);
   const [pending, setPending] = useState(false);
   const [errors, setErrors] = useState({ email: [], password: [], other: [] });
 
@@ -19,7 +20,7 @@ export const useLoginForm = (login) => {
       const data = await response.json();
 
       if (data.status === "success") {
-        alert("Logged in successfully");
+        setLoggedIn(true);
       } else {
         setErrors({
           email: data.errors
@@ -48,6 +49,7 @@ export const useLoginForm = (login) => {
   };
 
   return {
+    loggedIn,
     pending,
     errors,
     handleSubmit,

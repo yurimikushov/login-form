@@ -5,11 +5,21 @@ import "./reset.css";
 import "./app.css";
 
 export const App = () => {
-  const { pending, errors, handleSubmit } = useLoginForm(login);
+  const { loggedIn, pending, errors, handleSubmit } = useLoginForm(login);
 
   return (
     <main>
-      <LoginForm pending={pending} errors={errors} onSubmit={handleSubmit} />
+      <div className="container">
+        {loggedIn ? (
+          <p>🎉 Yay, you have just logged in!</p>
+        ) : (
+          <LoginForm
+            pending={pending}
+            errors={errors}
+            onSubmit={handleSubmit}
+          />
+        )}
+      </div>
     </main>
   );
 };
