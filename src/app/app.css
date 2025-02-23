@@ -3,7 +3,7 @@ body {
 
   color: #fff;
 
-  background-color: #121212;
+  background-color: #0056ab;
 }
 
 button {
@@ -12,36 +12,41 @@ button {
 
   font-size: 1rem;
 
-  color: #1f1f24;
+  color: #0056ab;
 
   cursor: pointer;
 
   border: none;
   border-radius: 4px;
 
-  background-color: #fafaff;
+  background-color: #f7ff75;
 }
 
 a {
-  color: #f7f7ffe6;
+  color: #f7ff75;
+
+  outline-offset: 0;
 }
 
 input {
   padding-block: 8px;
   padding-inline: 12px;
 
+  color: #fff;
+
   font-size: 1rem;
 
-  border: 2px solid #ced4da;
-
+  border: 2px solid #f7ff75;
   border-radius: 8px;
+
+  background-color: #9fa828;
 }
 
 button:focus-visible,
 a:focus-visible,
 input:focus-visible {
-  box-shadow: 0 0 0 4px #fafaff;
-  outline: 2px solid #131317;
+  box-shadow: 0 0 0 4px #f7ff75;
+  outline: 2px solid #0056ab;
 }
 
 main {
