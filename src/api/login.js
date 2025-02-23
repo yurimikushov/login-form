@@ -41,7 +41,7 @@ const latency = () => {
   return Math.floor(Math.random() * (end - start + 1) + start);
 };
 
-export const login = (email, password) => {
+const fakeApiCall = (email, password) => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       const emailError = validateEmail(email);
@@ -87,4 +87,34 @@ export const login = (email, password) => {
       });
     }, latency());
   });
+};
+
+export const login = async (email, password) => {
+  try {
+    const response = await fakeApiCall(email, password);
+
+    if (!response.ok) {
+      return {
+        status: "error",
+        errors: [
+          {
+            id: "api.unavailable",
+            message: "Service unavailable, please try again",
+          },
+        ],
+      };
+    }
+
+    return await response.json();
+  } catch {
+    return {
+      status: "error",
+      errors: [
+        {
+          id: "network.unavailable",
+          message: "Network error, please try again",
+        },
+      ],
+    };
+  }
 };

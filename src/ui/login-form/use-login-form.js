@@ -12,12 +12,10 @@ export const useLoginForm = (login) => {
     setErrors({ email: [], password: [], other: [] });
 
     try {
-      const response = await login(
+      const data = await login(
         e.target["login-form-email"].value,
         e.target["login-form-password"].value
       );
-
-      const data = await response.json();
 
       if (data.status === "success") {
         setLoggedIn(true);
@@ -39,10 +37,11 @@ export const useLoginForm = (login) => {
         });
       }
     } catch (error) {
-      setErrors((prev) => ({
-        ...prev,
-        other: ["Network error, please try again"],
-      }));
+      setErrors({
+        email: [],
+        password: [],
+        other: ["Something went wrong, please try again"],
+      });
     } finally {
       setPending(false);
     }
