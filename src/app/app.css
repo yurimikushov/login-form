@@ -53,7 +53,7 @@ main {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: safe center;
 
   min-block-size: 100dvh;
 }
