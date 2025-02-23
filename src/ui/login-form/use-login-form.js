@@ -1,12 +1,24 @@
-import { useState } from "preact/hooks";
+import { useEffect, useRef, useState } from "preact/hooks";
 
 export const useLoginForm = (login) => {
   const [loggedIn, setLoggedIn] = useState(false);
   const [pending, setPending] = useState(false);
   const [errors, setErrors] = useState({ email: [], password: [], other: [] });
 
+  const lastFocusedElementRef = useRef();
+
+  useEffect(() => {
+    if (pending) {
+      return;
+    }
+
+    lastFocusedElementRef.current?.focus();
+  }, [pending]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    lastFocusedElementRef.current = document.activeElement;
 
     setPending(true);
     setErrors({ email: [], password: [], other: [] });
