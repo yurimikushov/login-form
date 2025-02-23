@@ -42,7 +42,7 @@ const latency = () => {
 };
 
 export const login = (email, password) => {
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
     setTimeout(() => {
       const emailError = validateEmail(email);
       const passwordError = validatePassword(password);
@@ -57,6 +57,12 @@ export const login = (email, password) => {
               errors: [emailError, passwordError].filter(Boolean),
             }),
         });
+        return;
+      }
+
+      // network error simulation
+      if (Math.random() > 0.8) {
+        reject(new Error("Network error"));
         return;
       }
 
